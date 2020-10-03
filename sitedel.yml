@@ -4,7 +4,7 @@
   become: yes #if root needs
 
   tasks:
-  - name: Ensure nginx package is present
+  - name: Ensure nginx package is absent
     apt:
       name: nginx
       state: absent
@@ -19,7 +19,7 @@
   become: yes
 
   tasks:
-  - name: Ensure nginx package is present
+  - name: Ensure nginx package is absent
     apt:
       name: nginx
       state: absent
