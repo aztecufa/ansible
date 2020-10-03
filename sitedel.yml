@@ -9,27 +9,22 @@
       name: nginx
       state: absent
 
-  - name: Ensure index.html is present
-    copy:
-      src: index.html
-      dest: /var/www/html
+  - name: del index.html
+    file:
+      state: absent
+      path: /var/www/html/index.html
 
-  - name: Ensure nginx service is started
-    service:
-      name: nginx
-      state: started
-
-- name: install db
+- name: uninstall db and nginx
   hosts: db
   become: yes
 
   tasks:
+  - name: Ensure nginx package is present
+    apt:
+      name: nginx
+      state: absent
+
   - name: Ensure postgresql package is present
     apt:
       name: postgresql
-      state: present
-
-  - name: Ensure postgresql service is started
-    service:
-      name: postgresql
-      state: started
+      state: absent
