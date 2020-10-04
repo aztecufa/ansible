@@ -48,5 +48,5 @@
   - name: copy war file to prod server
     synchronize:
       src: /home/warhello/target/hello-1.0.war
-      dest: /usr/local/tomcat/webapps/hello-1.0.war
+      dest: /var/lib/tomcat9/webapps/hello-1.0.war
     delegate_to: two
