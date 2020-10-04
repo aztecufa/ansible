@@ -11,23 +11,23 @@
       state: present
 
   - name: Ensure maven is present
-      apt:
-        name: maven
-        state: present
+    apt:
+      name: maven
+      state: present
 
   - name: Ensure git is present
-      apt:
-        name: git
-        state: present
+    apt:
+      name: git
+      state: present
 
   - name: git pull
-      git:
-        repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
-        dest: /home/
+    git:
+      repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
+      dest: /home/
 
   - name: packaging war file  
-      shell:  
-        cmd: mvn package -f /home/boxfuse-sample-java-war-hello/pom.xml
+    shell:  
+      cmd: mvn package -f /home/boxfuse-sample-java-war-hello/pom.xml
 
 - name: start tomcat service
   hosts: prod
