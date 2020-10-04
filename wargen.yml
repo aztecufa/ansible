@@ -50,4 +50,3 @@
       src: /home/boxfuse-sample-java-war-hello/target/hello-1.0.war
       dest: /usr/local/tomcat/webapps/hello-1.0.war
       delegate_to: war
----
