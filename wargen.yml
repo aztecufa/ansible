@@ -1,0 +1,22 @@
+---
+- name: Process war file
+  hosts: war
+  become: yes
+
+  tasks:
+  - name: Ensure default-jdk is present
+    apt:
+      update_cache: yes
+      name: default-jdk
+      state: present
+
+  -name: Ensure maven is present
+    apt:
+      name: maven
+      state: present
+
+  -name: Ensure git is present
+    apt:
+      name: git
+      state: present
+      
