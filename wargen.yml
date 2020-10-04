@@ -10,13 +10,44 @@
       name: default-jdk
       state: present
 
-  -name: Ensure maven is present
-    apt:
-      name: maven
-      state: present
+  - name: Ensure maven is present
+      apt:
+        name: maven
+        state: present
 
-  -name: Ensure git is present
+  - name: Ensure git is present
+      apt:
+        name: git
+        state: present
+
+  - name: git pull
+      git:
+        repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
+        dest: /home/
+
+  - name: packaging war file  
+      shell:  
+        cmd: mvn package -f /home/boxfuse-sample-java-war-hello/pom.xml
+
+- name: start tomcat service
+  hosts: prod
+  become: yes
+
+  tasks:
+  - name: Ensure tomcat is present
     apt:
-      name: git
-      state: present
-      
+    update_cache: yes
+    name: tomcat9
+    state: present
+
+  - name: Ensure tomcat service is started
+    service:
+      name: tomcat
+      state: started
+
+  - name: copy war file to prod server
+    synchronize:
+      src: /home/boxfuse-sample-java-war-hello/target/hello-1.0.war
+      dest: /usr/local/tomcat/webapps/hello-1.0.war
+      delegate_to: war
+---
