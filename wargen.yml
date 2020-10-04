@@ -23,11 +23,11 @@
   - name: git pull
     git:
       repo: https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
-      dest: /home/
+      dest: /home/warhello/
 
   - name: packaging war file  
     shell:  
-      cmd: mvn package -f /home/boxfuse-sample-java-war-hello/pom.xml
+      cmd: mvn package -f /home/warhello/boxfuse-sample-java-war-hello/pom.xml
 
 - name: start tomcat service
   hosts: prod
@@ -47,6 +47,6 @@
 
   - name: copy war file to prod server
     synchronize:
-      src: /home/boxfuse-sample-java-war-hello/target/hello-1.0.war
+      src: /home/warhello/boxfuse-sample-java-war-hello/target/hello-1.0.war
       dest: /usr/local/tomcat/webapps/hello-1.0.war
       delegate_to: war
